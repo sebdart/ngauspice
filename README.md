@@ -11,7 +11,7 @@ This version of Auspice is optimized for NGA AWS Cloud and Cloud Foundry for our
 ## Getting Started ... Installation
 The code run under either Ubuntu/Debian or RHEL. If you have Windows 10, see below how to get started ...
 
-You need to install NODEjs and NPM to have it ran on your local machine or on the Cloud such as AWS EC2, Pivotal Cloud Foundry, etc. NODEjs/NPM is not easy to install as it is meant to aggravate you (possibly to the point of madness). You can use v11, 12, or 14 of the install here below shown for v14.
+You need to install NODEjs and NPM to have it ran on your local machine or on the Cloud such as AWS EC2, Pivotal Cloud Foundry, etc. NODEjs/NPM is not easy to install as it is meant to aggravate you (possibly to the point of madness). You can use v11, 12, or 14 for the install; here below we use v14.
 
 You need SUDO privileges to do this.
 
@@ -72,9 +72,13 @@ check your install:
 ~$ auspice -v
 ```
 Run auspice (assuming data directory is in its default location, ie., ~/auspice/data):
-`~$ auspice view`
+```
+~$ auspice view
+```
 If your data directory is in an unusual place, provide the path to it:
-`~$ auspice view --datasetDir ~/auspice/path/to/data`
+```
+~$ auspice view --datasetDir ~/auspice/path/to/data
+```
 
 And view auspice in the browser at [localhost:4000](http://localhost:4000)
 
@@ -92,13 +96,17 @@ It will install NPM/NODEjs locally in the auspice directory.
 ```
 check your install:
 ```
-~$ auspice -h
-~$ auspice -v
+~$ node auspice.js -h
+~$ node auspice.js -v
 ```
 Run auspice (assuming data directory is in its default location, ie., ~/auspice/data):
-`~$ node auspice.js view`
+```
+~$ node auspice.js view
+```
 If your data directory is in a unusual place, provide the path to it:
-`~$ node auspice.js view --datasetDir ~/auspice/path/to/data`
+```
+~$ node auspice.js view --datasetDir ~/auspice/path/to/data
+```
 
 And view auspice in the browser at [localhost:4000](http://localhost:4000)
 
@@ -117,7 +125,7 @@ IF Local Install:
 `~$ node auspice.js build`
 
 ## About those dreadful NPM Errors (mostly with the Global Install) ...
-You need more valiums and wine ... These errors usually happens when you want to rebuild the auspice app without changing your (Global) NPM Install. It may also happen with your first build of the App.
+You need more valiums and wine ... These errors usually happen when you want to rebuild the auspice app without changing your (Global) NPM Install. It may also happen with your first build of the App.
 
 Here typically what may happen and how to solve it (it can happen on all Linux flavors).
 
@@ -148,11 +156,15 @@ Fix it in owning this directory:
 Then restart your build ... This CHOWN error may repeat itself for other subdirectories, you may have to repeat this several times.
 
 ### The Source-Map (or any other missing module) Error
-A Nodejs module may be neede and is missing on your system:
-`npm ERR! enoent ENOENT: no such file or directory, access '/home/some_users/auspice/node_modules/@types/uglify-js/node_modules/source-map'`
+A Nodejs module may be needed and is missing on your system:
+```
+npm ERR! enoent ENOENT: no such file or directory, access '/home/some_users/auspice/node_modules/@types/uglify-js/node_modules/source-map'
+```
 
 You need to install a missing module, specifically (it happened to me on AWS RHEL):
-`~$ npm install source-map`
+```
+~$ npm install source-map
+```
 
 Then restart your build ...
 
@@ -160,9 +172,10 @@ Then restart your build ...
 `npm ERR! Maximum call stack size exceeded`
 
 Erase the node_modules subdirectory (ie.,~/auspice/node_modules), force a NPM clear cache, restart your terminal windows:
-
-`~$ npm cache clean --force`
-`~$ rm -rf node_modules`
+```
+~$ npm cache clean --force
+~$ rm -rf node_modules
+```
 
 Close your Terminal window and reopen, then restart your build ...
 
@@ -220,13 +233,13 @@ v14.14.0              #Good job
 ## How to remove completly NODE.js and NPM before re-installing
 NODE.js and NPM are very difficult tools to use; hard to install and hard to completely remove from your system. From time to time, you may have to remove a previous broken version and re-install anew--aspecially if you did a Global Install. Also, please note, that Auspice and Pivotal Cloud Foundry are compatible with only a few version of NPM and NODE.js.
 
-It is recommended you do this complete removal of NPM/NODEjs from your system if you want to install a newer version of NPM/NODEjs.
+It is also recommended that you do this complete removal of NPM/NODEjs from your system before installing a newer/update version of NPM/NODEjs.
 
 So, follow these instructions:
 
 
 ### Removing GLOBAL NODEjs/NPM from RHEL
-Be in /home directory: cd ~
+Be in /home directory: `cd ~`
 
 ```
 ~$ sudo rm -rf .npm
@@ -235,8 +248,7 @@ Be in /home directory: cd ~
 (~$ sudo npm uninstall npm -g)         ##not needed
 ~$ sudo rm -rf /usr/lib/node_modules
 ~$ sudo rm /usr/bin/auspice            ##This is a symbolic link but better remove it if it exists
-~$ sudo rm /usr/bin/sars-cov-2         ##This is a symbolic link but better remove it if it exists
-~$ sudo rm -rf /root/.npm              ##yes remove it if it exists, you can!; it was hidden well, real poison that one!
+~$ sudo rm -rf /root/.npm              ##yes remove it, if it exists, you can!; it was hidden well, real poison that one!
 ```
 
 Check:
@@ -259,7 +271,7 @@ Check again:
 Now you are ready to reinstall NODEjs/NPM (whether Globally or Locally) fresh (see above the install instructions)
 
 ### Removing GLOBAL NODEjs/NPM from Ubuntu/Debian
-Be in /home directory: cd ~
+Be in /home directory: `cd ~`
 ```
 ~$ rm -rf ~/auspice/dist ~/auspice/node_modules
 ~$ sudo npm uninstall npm -g
