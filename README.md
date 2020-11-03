@@ -48,10 +48,14 @@ v14.14.0              #Good job!
 
 ### Cloning the app from NGA systems
 If you are DOD member and have a CAC card:
-`~$ git clone git@gitlab.gs.mil:Dartevelle.Sebastien.1503290509/auspice.git`
+```
+~$ git clone git@gitlab.gs.mil:Dartevelle.Sebastien.1503290509/auspice.git
+```
 
 If not, request an account to me to NGA GIT IO domain:
-`~$ git clone git@gitlab.devops.geointservices.io:darteves/auspice.git`
+```
+~$ git clone git@gitlab.devops.geointservices.io:darteves/auspice.git
+```
 
 Contact me for other ways to access the app: sebastien.dartevelle@nga.mil
 
@@ -151,25 +155,63 @@ Check what's going on:
 drwxr-xr-x  3 root root   17 Aug  5 10:27 node_modules
 ```
 Fix it in owning this directory:
-`~$ sudo chown -R $USER /usr/lib/node_modules`
+```
+~$ sudo chown -R $USER /usr/lib/node_modules
+```
 
-Then restart your build ... This CHOWN error may repeat itself for other subdirectories, you may have to repeat this several times.
+Then restart your build where you left of ... This CHOWN error may repeat itself for other subdirectories, you may have to repeat this several times.
 
-### The Source-Map (or any other missing module) Error
+### The Source-Map (or any other missing module: html-webpack-plugin) Error
 A Nodejs module may be needed and is missing on your system:
 ```
 npm ERR! enoent ENOENT: no such file or directory, access '/home/some_users/auspice/node_modules/@types/uglify-js/node_modules/source-map'
 ```
-
+or
+```
+internal/modules/cjs/loader.js:1088
+  throw err;
+  ^
+Error: Cannot find module 'html-webpack-plugin'
+Require stack:
+- /home/usr/auspice/webpack.config.js
+- /home/usr/auspice/cli/build.js
+- /home/usr/auspice/auspice.js
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:1085:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:928:27)
+    at Module.require (internal/modules/cjs/loader.js:1145:19)
+    at require (internal/modules/cjs/helpers.js:75:18)
+    at Object.<anonymous> (/home/usr/auspice/webpack.config.js:7:27)
+    at Module._compile (internal/modules/cjs/loader.js:1256:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1277:10)
+    at Module.load (internal/modules/cjs/loader.js:1105:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:967:14)
+    at Module.require (internal/modules/cjs/loader.js:1145:19)
+    at require (internal/modules/cjs/helpers.js:75:18)
+    at Object.<anonymous> (/home/usr/auspice/cli/build.js:3:31)
+    at Module._compile (internal/modules/cjs/loader.js:1256:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1277:10)
+    at Module.load (internal/modules/cjs/loader.js:1105:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:967:14) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/home/usr/auspice/webpack.config.js',
+    '/home/usr/auspice/cli/build.js',
+    '/home/usr/auspice/auspice.js'
+  ]
+}
+```
 You need to install a missing module, specifically (it happened to me on AWS RHEL):
 ```
+$ cd ~/auspice                              #Make sure you are still in auspice directory
 ~$ npm install source-map
+~$ npm install html-webpack-plugin
 ```
+Then restart your build where you left of ...
 
-Then restart your build ...
-
-### The call stack Error
-`npm ERR! Maximum call stack size exceeded`
+### The Call Stack Error
+```
+npm ERR! Maximum call stack size exceeded
+```
 
 Erase the node_modules subdirectory (ie.,~/auspice/node_modules), force a NPM clear cache, restart your terminal windows:
 ```
@@ -177,18 +219,61 @@ Erase the node_modules subdirectory (ie.,~/auspice/node_modules), force a NPM cl
 ~$ rm -rf node_modules
 ```
 
-Close your Terminal window and reopen, then restart your build ...
+Close your Terminal window and reopen, then restart your build where you left of ...
 
 ### The Cannot create a Symbolic Link Error
-It is actually not that bad, it means you are getting towards the end of your NPM torture; this is common with NPM with a Global install. You need SUDO permission!
+It is actually not that bad, it means you are getting towards the end of your NPM torture; this is common with NPM with a Global install. What happens is that for some unclear reasons, NPM cannot save a Symbolic Link inside the /usr/bin directory to link to your auspice application.
+
+You need SUDO permission!
+
+The Error looks like this:
+
 ```
-$cd /usr/bin/
-~bin$ sudo ln -s /usr/lib/node_modules/auspice/auspice.js /usr/bin/auspice
+npm ERR! code EACCES 
+npm ERR! syscall symlink
+npm ERR! path ../lib/node_modules/auspice/auspice.js
+npm ERR! dest /usr/bin/auspice
+npm ERR! errno -13
+npm ERR! Error: EACCES: permission denied, symlink '../lib/node_modules/auspice/auspice.js' -> '/usr/bin/auspice'
+npm ERR!  [OperationalError: EACCES: permission denied, symlink '../lib/node_modules/auspice/auspice.js' -> '/usr/bin/auspice'] {
+npm ERR!   cause: [Error: EACCES: permission denied, symlink '../lib/node_modules/auspice/auspice.js' -> '/usr/bin/auspice'] {
+npm ERR!     errno: -13,
+npm ERR!     code: 'EACCES',
+npm ERR!     syscall: 'symlink',
+npm ERR!     path: '../lib/node_modules/auspice/auspice.js',
+npm ERR!     dest: '/usr/bin/auspice'
+npm ERR!   },
+npm ERR!   errno: -13,
+npm ERR!   code: 'EACCES',
+npm ERR!   syscall: 'symlink',
+npm ERR!   path: '../lib/node_modules/auspice/auspice.js',
+npm ERR!   dest: '/usr/bin/auspice'
+npm ERR! }
+npm ERR! 
+npm ERR! The operation was rejected by your operating system.
+npm ERR! It is likely you do not have the permissions to access this file as the current user
+npm ERR! 
+npm ERR! If you believe this might be a permissions issue, please double-check the
+npm ERR! permissions of the file and its containing directories, or try running
+npm ERR! the command again as root/Administrator.
+```
+The only way to resolve this is to ask NPM to build the app without any attempt to create Symbolic Link; you will do it yourself. I found this error common under RHEL.
+
+So, you must do this:
+```
+$ cd ~/auspice                                #make sure you are still in the auspice directory
+$ npm install --no-bin-links --global .       #NPM install wihtout any Symbolic Link saved
+$ cd /usr/bin/                                #moce to the /usr/bin directory to create yourself--manually--the Symbolic Link
+$ sudo ln -s /usr/lib/node_modules/auspice/auspice.js /usr/bin/auspice             #Here you are your force the Symbolic Link.
 ```
 Check:
-`~bin$ ls -la1 /usr/bin/auspice`
+`$ ls -la1 /usr/bin/auspice`
 
-Restart your Global build ...
+Restart your Global build:
+```
+$ cd ~/auspice
+$ auspice build
+```
 
 ### Everything fails, then you should COMPLETELY remove NPM/NODEjs
 See below (more valium and wine needed)
