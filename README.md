@@ -5,7 +5,7 @@
 # About Auspice
 **Auspice** is an open-source interactive web app for visualizing phylogenomic data. Auspice may be used to explore datasets locally or run as a server to share online your results. Auspice is developed by the NextStrain team: https://nextstrain.org/. We thank them for making this code available to the entire community.
 
-This version of Auspice is optimized for NGA AWS Cloud and Cloud Foundry for our own visualization needs.
+This version of Auspice is optimized for NGA AWS Cloud and Cloud Foundry for our own visualization needs. What you have here is what you can see here: https://sars-cov2.dev.east.paas.nga.mil/ ; however because of space restriction in this public GITHUB, you need to request the other GenBank and GISAID dataset by email to sebastien.dartevelle@nga.mil .
 
 
 ## Getting Started ... Installation
