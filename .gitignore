@@ -1,0 +1,42 @@
+### App specific ###
+/releases/
+/static/
+/local_narratives/
+/old_narratives/
+/alldata/
+/allnarratives/
+/examples/
+/data/sars-cov-2_all.json
+/data/sars-cov-2_GenBank.json
+/data/sars-cov-2_africa.json
+/data/sars-cov-2_asia.json
+/data/sars-cov-2_europe.json
+/data/sars-cov-2_north-america.json
+/data/sars-cov-2_south-america.json
+/data/sars-cov-2_oceania.json
+/data/sars-cov-2_global.json
+/data/sars-cov-2_OLD-subsampleA.json
+/data/sars-cov-2_OLD-subsampleB.json
+/data/sars-cov-2_OLD-subsampleC.json
+/data/sars-cov-2_OLD-subsampleD.json
+/data/sars-cov-2_reinfections3.json
+/data/sars-cov-2_reinfection.json
+/data/sars-cov-2_reinfections_SubsampleGenBank.json
+/data/sars-cov-2_reinfections_AllGenBank.json
+/narratives/
+/test/integration/__image_snapshots__/
+
+### OSX ###
+.DS_Store
+.ssh
+.conda
+.cf
+
+### npm ###
+/node_modules/
+/dist/
+npm-debug.log
+*tgz
+
+### IDE ###
+.vscode/*

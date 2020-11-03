@@ -1,0 +1,33 @@
+### App specific ###
+/releases/
+/static/
+/local_narratives/
+/old_narratives/
+/alldata/
+/allnarratives/
+/docs/
+/examples/
+
+### OSX ###
+.DS_Store
+
+### npm ###
+npm-debug.log
+
+### Files ###
+LICENSE.txt
+README.md
+CHANGELOG.md
+DEV_LOCS.md
+
+### Scripts ###
+get-data.sh
+get-narratives.sh
+
+### IDE ###
+.vscode/*
+
+### .ignore ###
+.eslintignore
+.eslintrc
+.gitattributes
