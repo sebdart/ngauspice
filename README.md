@@ -5,7 +5,7 @@
 # About Auspice
 **Auspice** is an open-source interactive web app for visualizing phylogenomic data. Auspice may be used to explore datasets locally or run as a server to share online your results. Auspice is developed by the NextStrain team: https://nextstrain.org/. We thank them for making this code available to the entire community.
 
-This version of Auspice is optimized for NGA AWS Cloud and Cloud Foundry for our own visualization needs. What you have here is what you can see here: https://sars-cov2.dev.east.paas.nga.mil/ ; however because of space restriction in this public GITHUB, you need to request the other GenBank and GISAID dataset by email to sebastien.dartevelle@nga.mil .
+This version of Auspice is optimized for NGA AWS Cloud and Cloud Foundry for our own visualization needs.
 
 
 ## Getting Started ... Installation
@@ -61,12 +61,24 @@ Contact me for other ways to access the app: sebastien.dartevelle@nga.mil
 
 Once cloned, you have two options, the easy one (Local Install) and the nightmarish one (Global Install). On AWS EC2, we only tested the global install. On Cloud Foundry and on our local machines, we tested both. _If you dont have SUDO permission **DO NOT** attempt the Global Install_
 
+If you clone from a public open-source GIT, like this one:
+```
+~$ git clone git@github.com:sebdart/ngauspice.git
+```
+
+Then, for the following section, either, just rename the directory or, alternatively, anywhere you see *cd auspice* in the following, just write *cd ngauspice*. To rename a directory in Linux:
+
+```
+~$ mv ngauspice auspice
+~$ ls -lat1              #check it renamed indeed
+```
+
 ### The Infamous Global Install
 Take a few valiums (maximum dosage, no limit) + a few glasses of red wine; ensure you are semi-conscious ...
 It will install NPM/NODEjs on your machine/instance globally--it is meant to boost your stress level.
 
 ```
-~$ cd auspice
+~$ cd auspice              #or *cd ngauspice*, depending on where you cloned from
 ~$ npm install --global .
 ~$ auspice build
 ```
@@ -394,7 +406,7 @@ Check
 ~$ cf install-plugin cfdev
 ```
 
-If you are confused, just ask; I did all the martyrdom stuff for you, you dont need to go through that again: sebastien.dartevelle@nga.mil
+If you are confused, just ask; I did all the martyrdom stuff for you, you dont need to go through that again: cd 
 
 ## License and copyright
 
